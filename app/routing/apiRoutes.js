@@ -31,8 +31,6 @@ module.exports = function(app) {
     // req.body is available since we're using the body-parser middleware
 
       friends.push(req.body);
-    }
-
-  });
+    });
 
 };

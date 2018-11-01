@@ -44,7 +44,7 @@
             <form role="form">
 
               <div class="form-group">
-                <label for="namename">Name (required):</label>
+                <label for="name">Name (required):</label>
                 <input type="text" class="form-control" id="name">
               </div>
 
@@ -373,47 +373,86 @@
 
     // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
     // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-    // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-    // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+    // Our api recognizes the route (/api/friends)... and then runs the associated code (found in apiRoutes.js).
+    // In this case the associated code "saves" the data to the friends.js file
 
     $(".submit").on("click", function(event) {
       event.preventDefault();
 
-      // Here we grab the form elements
-      var newReservation = {
-        customerName: $("#reserve-name").val().trim(),
-        phoneNumber: $("#reserve-phone").val().trim(),
-        customerEmail: $("#reserve-email").val().trim(),
-        customerID: $("#reserve-unique-id").val().trim()
-      };
-
-      console.log(newReservation);
-
-      // This line is the magic. It"s very similar to the standard ajax function we used.
-      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-      // depending on if a tables is available or not.
-
-      $.post("/api/tables", newReservation,
-        function(data) {
-
-          // If a table is available... tell user they are booked.
-          if (data) {
-            alert("Yay! You are officially booked!");
+      // Form validation
+      function validateForm() {
+        let isValid = true;
+        $(".form-control").each(function() {
+          if ($(this).val() === "") {
+            isValid = false;
           }
-
-          // If a table is available... tell user they on the waiting list.
-          else {
-            alert("Sorry you are on the wait list");
-          }
-
-          // Clear the form when submitting
-          $("#reserve-name").val("");
-          $("#reserve-phone").val("");
-          $("#reserve-email").val("");
-          $("#reserve-unique-id").val("");
-
         });
+
+        $(".chosen-select").each(function() { 
+            if ($(this).val() === "") {
+              isValid = false;
+            }
+          });
+        return isValid;
+      }
+
+      // If all required fields are filled
+      if (validateForm()) {
+
+        // Here we grab the form elements
+        // Create an object for the user"s data
+        let newFriend = {
+          name: $("#name").val().trim(),
+          photo: $("#pic-link").val().trim(),
+          scores: [
+            $("#q1").val(),
+            $("#q2").val(),
+            $("#q3").val(),
+            $("#q4").val(),
+            $("#q5").val(),
+            $("#q6").val(),
+            $("#q7").val(),
+            $("#q8").val(),
+            $("#q9").val(),
+            $("#q10").val()
+          ]
+        };
+        console.log(newFriend);
+
+          // We give it a URL, we give it the object we want to send, then we have a "callback".
+          // AJAX post the data to the friends API.
+        $.post("/api/friends", match, function(data) {
+
+// The callback is the response of the server. In our case, we set up code in api-routes that "returns" the best fit friend.
+
+// 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
+// * The modal should display both the name and picture of the closest match.
+
+// Grab the result from the AJAX post so that the best match's name and photo are displayed.
+          $("#match-name").text(data.name);
+          $("#match-pic").attr("src", data.photo);
+// Show the friend with the best match
+          $("#results-friend").modal("toggle");
+          
+        });
+
+          // Clear the form when submitting??
+        // $("#name").val("");
+        // $("#pic-link").val("");
+        // $("#q1").val("");
+        // $("#q2").val("");
+        // $("#q3").val("");
+        // $("#q4").val("");
+        // $("#q5").val("");
+        // $("#q6").val("");
+        // $("#q7").val("");
+        // $("#q8").val("");
+        // $("#q9").val("");
+        // $("#q10").val("");
+
+      } else {
+        alert("Please fill out all fields before submitting!");
+      }
 
     });
 

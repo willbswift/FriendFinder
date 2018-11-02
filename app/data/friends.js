@@ -75,17 +75,20 @@ module.exports = friendArray;
 console.log(friendArray);
   //set up variables 
 let testFriend = [];
+let newFriend = friendArray[friendArray.length-1];
+
+
+
 let l = friendArray[0].scores.length;
-m = l-1;
-console.log(m);
 
 //friendArray = JSON.parse(friendArray);
 //friendArray = JSON.stringify(friendArray, null, 4)
 
-console.log(friendArray[m]);
-let newfriend = friendArray[m];
+console.log(newFriend);
+
+
   // Convert new user's results into a simple array of numbers.
-let currentFriendScores = newfriend.scores;
+let currentFriendScores = newFriend.scores;
 let totDiff = [];
 
 for (let j = 0; j < l; j++) {
@@ -93,17 +96,18 @@ for (let j = 0; j < l; j++) {
   testFriendScores = friendArray[j].scores;
   console.log(testFriendScores);
 
-    // With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the `totalDifference`.
-  for(let i = 0; i <= testFriendScores.length -1; i++) {
+  //   // With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the `totalDifference`.
+   for(let i = 0; i <= l -1; i++) {
+    
       // * Remember to use the absolute value of the differences. 
     totDiff.push( Math.abs(currentFriendScores[i] - testFriendScores[i]));
-    console.log(totDiff);
+    //console.log(totDiff);
     let sum = totDiff.reduce(add, 0);
     function add(a, b) {
       return a + b;
     }
     
-    console.log(sum);
+    //console.log(sum);
     let allScores = [];
     allScores.push (sum)
 
@@ -116,7 +120,7 @@ for (let j = 0; j < l; j++) {
             maxIndex = k;
         }
     }
-  };
+  }
 };
 
 console.log(max);

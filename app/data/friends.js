@@ -17,9 +17,9 @@ let friendArray = [
         5,
         1,
         2,
-        5,
-        4,
-        1
+        0,
+        0,
+        0
       ]
   },
   {
@@ -71,66 +71,4 @@ let friendArray = [
 
   // Note how we export the array. This makes it accessible to other files using require.
 module.exports = friendArray;
-
-console.log(friendArray);
-  //set up variables 
-let testFriend = [];
-let newFriend = friendArray[friendArray.length-1];
-
-
-
-let l = friendArray[0].scores.length;
-
-//friendArray = JSON.parse(friendArray);
-//friendArray = JSON.stringify(friendArray, null, 4)
-
-console.log(newFriend);
-
-
-  // Convert new user's results into a simple array of numbers.
-let currentFriendScores = newFriend.scores;
-let totDiff = [];
-
-for (let j = 0; j < l; j++) {
-    // Convert each user's results into a simple array of numbers.
-  testFriendScores = friendArray[j].scores;
-  console.log(testFriendScores);
-
-  //   // With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the `totalDifference`.
-   for(let i = 0; i <= l -1; i++) {
-    
-      // * Remember to use the absolute value of the differences. 
-    totDiff.push( Math.abs(currentFriendScores[i] - testFriendScores[i]));
-    //console.log(totDiff);
-    let sum = totDiff.reduce(add, 0);
-    function add(a, b) {
-      return a + b;
-    }
-    
-    //console.log(sum);
-    let allScores = [];
-    allScores.push (sum)
-
-    let max = Infinity;
-    let maxIndex;
-      // * The closest match will be the user with the least amount of difference.
-    for (let k = 0; allScores.length > k; k++) {
-        if (allScores[k] < max) {
-            max = allScores[k];
-            maxIndex = k;
-        }
-    }
-  }
-};
-
-console.log(max);
-console.log(maxIndex);
-let match = friendArray[maxIndex];
-console.log(match.name);
-
-  // export the result. This makes it accessible to other files using require.
-module.exports = match;
-
-// 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
-// * The modal should display both the name and picture of the closest match.
 

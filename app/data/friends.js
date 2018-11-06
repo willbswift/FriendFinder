@@ -8,7 +8,7 @@
 let friendArray = [
   {
     name:"Ahmed",
-    photo:"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
+    photo:"https://cdn2us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/2017/10/riz-ahmed-rogue-one-a-star-wars-story.jpg?itok=B1lQrw5p",
     scores:[
         5,
         1,

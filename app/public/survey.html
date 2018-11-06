@@ -14,6 +14,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
+  <style>
+    select.form-control {
+      width: 200px;
+    }
+
+    img {
+      width: 90%;
+      height: auto;
+    }
+  </style>
 
 </head>
 <body>
@@ -58,6 +68,20 @@
                 <label for="pic-link">1. I love New (2005-2018) Doctor Who?</label>
                 <input type="number" class="form-control" id="q1" id="q1_chosen">
               </div>
+
+              <!-- TRY THIS -->
+              <!-- <div class="form-group">
+                <h4>1. I love New (2005-2018) Doctor Who?</h4>
+                <select id="selectydude" id="q1" class="form-control">
+                  <option value=1>1 (Strongly Disagree)</option>
+                  <option value=2>2</option>
+                  <option value=3>3</option>
+                  <option value=3>4</option>
+                  <option value=3>5 (Strongly Agree)</option>
+                </select>
+                <p id="output"></p> 
+              </div> -->
+
               <div class="form-group">
                 <label for="pic-link">2. I love Classic (1963-1989) Doctor Who?</label>
                 <input type="number" class="form-control" id="q2" id="q2_chosen">
@@ -95,25 +119,8 @@
                 <input type="number" class="form-control" id="q10" id="q10_chosen">
               </div>
 
-              <!-- TRY THIS
-              <select id="selectydude" class="form-control">
-                <option value=1>Thing 1</option>
-                <option value=2>Thing 2</option>
-                <option value=3>Thing 3</option>
-              </select>
-              <p id="output"></p> 
-            CSS
-            select.form-control {
-             width: 200px;
-              }
-            JS
-            const output = document.querySelector('#output')
-            document.querySelector('#selectydude')
-              .addEventListener('change', e => {
-                console.log(e.target.value)
-                output.innerHTML = "Value: "e.target.value;
-              })
-            -->
+
+
 
               <!-- <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -396,16 +403,40 @@
 
 
 
-
-              <button type="submit" class="btn btn-primary submit">Submit</button>
+              <!-- Trigger the modal with a button -->
+              <button type="submit" class="btn btn-primary submit" data-toggle="modal" data-target="#myModal">Submit</button>
             </form>
-
-            <div id=match-name></div>
 
           </div>
         </div>
 
       </div>
+
+      <!-- <h2 id = "match-name"></h2>
+      <img id = "match-pic"> -->
+  
+  <!-- Modal -->
+  <div id="myModal" id="match-friend" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>You new friend should be: </h4>
+          <h4 class="modal-title" id="match-name"></h4>
+        </div>
+        <div class="modal-body">
+          <img id = "match-pic">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+
     </div>
 
     <footer class="footer">
@@ -422,15 +453,22 @@
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
 
+            // TRY THIS
+            // let e;
+            //   const output = document.querySelector('#output')
+            // document.querySelector('#selectydude')
+            //   .addEventListener('change', e => {
+            //     console.log(e.target.value)
+            //     output.innerHTML = "Value: " + e.target.value;
+            //   })
 
-            //     //load stuff
+            //load stuff
             // $(document).ready(function () {
             // $(".dropdown-menu li a").click(function(){
             //   $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
             //   $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
             // });
             // });
-
 
 
     // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
@@ -494,7 +532,7 @@
           $("#match-name").text(data.name);
           $("#match-pic").attr("src", data.photo);
 // Show the friend with the best match
-          $("#results-friend").modal("toggle");
+          $("#match-friend").modal("toggle");
           
         });
 

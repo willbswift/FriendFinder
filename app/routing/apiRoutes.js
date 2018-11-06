@@ -42,6 +42,7 @@ module.exports = function (app) {
     let newFriend = friends[friendLength - 1];
     let scoreLength = friends[0].scores.length;
     let allScores = [];
+    let winner;
 
     //friendArray = JSON.parse(friendArray);
     //friendArray = JSON.stringify(friendArray, null, 4)
@@ -68,50 +69,43 @@ module.exports = function (app) {
         // * Remember to use the absolute value of the differences. 
         diff = Math.abs(parseInt(currentFriendScores[i]) - parseInt(testFriendScores[i]));
         totDiff = totDiff + diff;
-        //console.log("total diff " + totDiff);
-
-        // let sum = totDiff.reduce(add, 0);
-
-        // function add(a, b) {
-        //   return a + b;
-        // }
-
-
-        //console.log("this is" + max);
-        //console.log(maxIndex);
-        //let match = friends[maxIndex];
-        //console.log("Your best match is " + match);
-        // export the result. This makes it accessible to other files using require.
-        //module.exports = match;
 
       } // end iterate scores
+      
       allScores.push(totDiff);
+
     } // end iterate friends
-    console.log("allscores are " + allScores);
 
-    // find smallest allScores member, output index of that thing,
-    // because that index is the new best friend or whatever
+    //console.log("allscores are " + allScores);
 
-    // option 1
-    // someKindaFunction(allScores)
-    // => new friend res.send(newFriend)
+    // find smallest allScores member, output index of that thing, because that index is the new best friend
 
-    // option 2 - array.prototype methods (google "array.prototype MDN")
-    // allScores.reduce()
-    // => return index of new best fried
-    // res.send(allFriendsArray[index])
-
-
-    let arr = '720456789'.split('').map((x, i) => parseInt(x))
-    console.log(arr)
+      // option 1 - array.prototype methods (google "array.prototype MDN").  allScores.reduce() => return index of new best fried
+    let allScoresInteger = allScores.map((x, k) => parseInt(x));
+      console.log("all Ingeter scores");
+      console.log(allScoresInteger);
     
-    console.log(arr.reduce((winner,item, index)=>{
+    let lowIndex = allScoresInteger.reduce((winner, item, index)=>{
       if (item < winner.item){
         winner = { item, index };
       }
       return winner
-    }, {item: Infinity, index: null}).index) //0
+    }, {item: Infinity, index: null}).index 
 
+    console.log("this is winner index: " + lowIndex);
+    let match = friends[lowIndex];
+    console.log("Your best match is " + match.name);
+    res.send(match)
+
+    // option 2:  someKindaFunction(allScores)
+    // var index = 0;
+    // var value = temp[0];
+    // for (var i = 1; i < temp.length; i++) {
+    //   if (temp[i] < value) {
+    //     value = temp[i];
+    //     index = i;
+    //   }
+    // }
 
   })
 

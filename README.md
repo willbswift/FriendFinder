@@ -15,10 +15,14 @@ Once all the questions have been answered the user hits the Submit button.
 
 ![alt text](/Image3.jpg?raw=true "3rd pic") 
 
-One can hit the API Friends Link at the bottom of the page to see all the other Friends and verify that the new one has been added. 
+This pops up a modal with the best fit friend. 
+
+![alt text](/Image5.jpg?raw=true "5th pic") 
+
+One can hit the API Friends Link at the bottom of the page to see all the other Friends and verify that the new one has been added.   
 
 ![alt text](/Image4.jpg?raw=true "4rd pic") 
 
-Future upgrades will bring up a Modal showing the best matched friend. 
+If multiple friends are added in a single session then all the newly added friends will also be considered when another friend is added.
 
 - William B. Swift (creator and fan~!)
